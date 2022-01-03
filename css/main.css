@@ -1,0 +1,442 @@
+/* COMMON */
+.body__container {
+    /* 폰트링크만 가져온다고 먹여지는게 아님!!css에서 선언해줘야함 */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+a {
+    /* a태그는 많이쓰게됨. 밑줄없애는 용도로 많이씀*/
+    text-decoration: none; 
+}
+
+/* FLOAT CLEARFIX */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.float--left {
+    float: left;
+}
+.float--right {
+    float: right;
+}
+
+.summary {
+
+}
+.summary__title {
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1.25;
+    margin-bottom: 18px;
+}
+.summary__description {
+    font-size: 26px;
+    font-weight: 300;
+    color: #767676;
+    line-height: 1.5;
+}
+
+/* BTN */
+.btn {
+    height: 34px;
+    background: #eee linear-gradient(to bottom, #fcfcfc, #eee);
+    border: 1px solid #d5d5d5d5;
+    border-radius: 4px;
+    /* 플렉스는 블록처럼 만들어짐-위쓰가 오토-100%와 유사, 인라인요소화 해서 콘텐츠 너비만큼쓴다 */
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    color: #333;
+}
+
+.btn:hover::before {
+    content: "";
+    /* 부모요소에 포지션 값 확인! */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+}
+
+.btn.btn--primary {
+    border: 1px solid #65b836;
+    color: #fff;
+    background: #55a532 linear-gradient(#91dd70, #55ae2e);
+}
+
+/* INPUT */
+.input--text {
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none; /*  포커스 됐을때 테두리 안쓰겠다 */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075); /*inset-안쪽그림자 생성*/
+    font-size: 16px;
+}
+
+.input--text:focus {
+    border-color: #51a7e8;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                0 0 5px rgba(81, 167, 232, 0.5);  /*쉼표를 통해 다중처리도 가능함*/
+}
+/* 웹킷-크롬, 엠에스-ie,엣지, moz-firefox, o-opera(인풋플레이스작동x) */
+.input--text::-webkit-input-placeholder { color: #cacaca;}
+.input--text::-ms-input-placeholder { color: #cacaca;}
+.input--text::-moz-input-placeholder { color: #cacaca;}
+
+/* SECTION & INNER*/
+.section {
+    position: relative; /*위치의 기준을 '나'로 잡아주세요_앱솔루트를 쓰기위한 절차임*/
+}
+.section .inner {
+    max-width: 980px;
+    margin: 0 auto; /*가로사이즈가 지정이 되어야지만 가운데 정렬을 쓸 수 있다!!*/
+    box-sizing: border-box;
+    position: relative; /*이너부분에서 1차적으로 걸러지게 해주기 위해서!!*/
+}
+
+/* HEADER */
+
+header {
+    border-bottom: 1px solid rgba(0,0,0, .75);
+    box-shadow: 0 0 5px rgba(0,0,0, .75);
+    background: #fff;
+}
+
+header .inner {
+    height: 78px;  /*상위요소는 하위에 영향을 받다보니까 하위에 높이를 정해주기만 하면 깔끔*/
+}
+
+/* 매번 타고타고 가기 힘드니 space(후손선택자로 건너뜀)*/
+header .menu-group {
+    display: flex;
+    align-items: center;
+    height: 100%; /*부모의 영향을 받음-78픽셀일거임*/
+
+}
+header .logo {
+    margin-right: 10px;
+}
+header .logo a { /*이미지 태그가 아닌 백그라운드로 쓴다.alt가 없으니 콘텐츠는 살리고 보이지만 않게*/
+    display: block;
+    background: url("../img/logo.svg");
+    width: 32px;
+    height: 32px;
+    text-indent: -9999px; /*화면밖으로 뻥 날려버림_구조에는 존재*/
+}
+header .logo a:hover {
+    background: url("../img/logo_on.svg");
+}
+
+header .main-menu {
+    display: flex;
+}
+
+header .main-menu li a {
+    display: block; /*a는 인라인 패딩 마진 안됨*/
+    padding: 10px; /* 선택영역 크기도 커지고 마진 먹인것처럼 보.임.*/
+    color: #3c4146;
+}
+
+header .main-menu li a:hover {
+    color: #4078c0;
+}
+
+header .sign-group {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 100%;
+}
+header .btn-group {
+    display: flex;
+}
+
+header .btn-group .sign-in{
+    margin-right: 4px;
+}
+
+#search-form {
+    margin-right: 12px;
+}
+
+#search {
+    width: 160px;
+    font-size: 14px;
+}
+#search + [type="submit"] {
+    display: none;
+}
+header .sub-menu {
+    display: flex;
+    margin-right: 10px;
+}
+
+header .sub-menu li a {
+    display: block;
+    padding: 8px;
+    font-size: 13px;
+    color: #3c4146;
+}
+
+header .sub-menu li a:hover {
+    color: #4078c0;
+}
+#toggle-btn {
+    display: none;
+    background: url("../img/toggle-btn.svg");
+    width: 18px;
+    height: 24px;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    cursor: pointer;
+    text-indent: -9999px;
+  }
+  
+
+
+/* VISUAL */
+.section--visual {
+    background: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: cover;
+}
+.section--visual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+.section--visual .inner {
+    padding: 160px 0;
+    display: flex;
+}
+.section--visual .summary {
+    flex-grow: 1;
+    flex-basis: 0;  /*=flex:1;___어렵다*/
+    margin-right: 90px;
+}
+.section--visual .summary__title {
+    color: #fff;
+    font-size: 54px;
+    text-shadow: 0 1px 1px rgba(0,0,0, 0.25),
+                 0 1px 25px rgba(0,0,0, .75);
+}
+.section--visual .summary__description {
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0, 0.25),
+                 0 1px 25px rgba(0,0,0, .75);
+}
+#sign-form {
+    width: 340px;
+    margin-top: 16px;
+}
+
+#sign-form li {
+    margin-bottom: 17px;
+}
+#sign-form li:last-child {
+    margin-bottom: 0;
+}
+#sign-form .input--text{
+    width: 100%;
+    height: 40px;
+}
+#sign-form .caption {
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgba(255,255,255, .6);
+    line-height: 1.5;
+    text-align: center;
+}
+#sign-form [type="submit"] {
+    width: 100%;
+    height: 62px;
+    padding: 0 25px;
+    font-size: 20px;
+    justify-content: center; /*인라인플레스 디스플레이여서*/
+}
+
+/* FEATURE */
+
+.section--feature {
+    background-color: #f5f5f5;
+    padding-top: 66px;
+}
+.section--feature .summary {
+    max-width: 820px; /*가변하는 요소로 해주기 위해 맥스위드!!*/
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* 하이트로해주면 높이가 고정이 되어서 안됨. 패딩탑을 %로 해주면 부모요소의 가로너비에 영향을 받음 */
+
+.section--feature .video {
+    max-width: 650px;
+    margin: 50px auto;
+}
+
+.section--feature .video .video-ratio {
+    height: 0;
+    padding-top: 56.25%;
+    position: relative;
+}
+
+.section--feature .video .video-ratio iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.section--feature .tiles {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.section--feature .tiles .inner{
+    max-width: 1200px;
+}
+.section--feature .tiles ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.section--feature .tiles li {
+    padding: 34px 24px;
+    text-align: center;
+    line-height: 1.5;
+    border-right: 1px solid #e5e5e5;
+    box-sizing: border-box;
+}
+.section--feature .tiles li:last-child {
+    border-right: none;
+}
+.section--feature .tiles li img {
+    max-width: 100%;
+    /* top left&right bottom */
+    padding: 14px 10% 24px;
+    box-sizing: border-box;
+}
+.section--feature .tiles li h3{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.section--feature .tiles li p {
+    font-size: 14px;
+    color: #767676;
+}
+
+/* WHERE IS */
+
+.section--where-is {
+
+}
+
+.section--where-is .inner {
+ padding-top: 80px;
+ padding-bottom: 80px;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 40px;
+    border: 1px solid rgba(0,0,0, .2);
+    border-bottom: none;
+    box-shadow: 0 0 20px rgba(0,0,0, .2);
+    box-sizing: border-box;
+}
+
+/* PRICING CARD */
+
+.section--pricing {
+    background: linear-gradient(#f5f5f5, #fff);
+}
+.section--pricing .inner {
+    padding: 80px 0;
+}
+.section--pricing .card{
+    display: flex;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.section--pricing .card .cell {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section--pricing .card .cell1 .btn {
+    height: 50px;
+    font-size: 16px;
+}
+.section--pricing .card .cell2 {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    flex: 1;
+    border-left: 1px solid #e5e5e5;
+}
+
+/* FOOTER */
+
+footer {
+
+}
+
+footer .inner {
+    padding: 50px 0;
+    border-top: 1px solid #eee;
+}
+footer .site-links {
+    display: flex;
+}
+footer .site-links li {
+    font-size: 12px;
+    margin-right: 10px;
+    color: #767676;
+}
+footer .site-links li a {
+    color: #4078c0;
+}
+footer .site-links li a:hover {
+    text-decoration: underline;
+}
+
+footer .logo {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 24px;
+    height: 24px;
+}
+
+footer .logo:hover svg {
+    fill: #4078c0;
+}
